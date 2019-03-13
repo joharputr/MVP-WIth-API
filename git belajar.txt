@@ -1,0 +1,25 @@
+git remote add origin .....  //menyambungkan ke git
+
+git checkout -b test --> ganti branch ke test
+git checkout test  --> pindah ke branch test
+git push origin test -->push ke brack test
+git branch --> check status branch
+
+
+cara merge branch master dan test
+git chechkout test
+git pull origin master
+
+jika di branch test isinya = aaa
+			     bbb
+
+di master isinya = aaa
+
+maka pindah ke branch master dan ketik git merge test maka hasilnya di brach master = aaa
+										      bbb
+
+jika isinya beda maka akan mengikut yang branch test
+
+
+
+berpindah ke commit sebelumnya
