@@ -1,5 +1,11 @@
 package com.example.binarmvp.model
 
-data class Student(val name :String, val email:String) {
+import com.google.gson.annotations.SerializedName
 
-}
+data class Student(
+    @field:SerializedName("id")
+    val id:Int,
+    @field:SerializedName("name")
+    val name :String,
+    @field:SerializedName("email")
+    val email:String)

@@ -1,9 +1,14 @@
-package com.example.binarmvp.Home
+package com.example.binarmvp.UI.Home
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import com.example.binarmvp.R
+import com.example.binarmvp.UI.NewStudent.NewStudentActivity
+import com.example.binarmvp.common.toast
 import com.example.binarmvp.model.Student
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainView {
 
     //biaasanya  1 class 1 presneter / 1 fragment 1 presenter
-    private val presenter = MainPresenter(this)
+    private val presenter = MainPresenter(this) //this artinya main view
     private val studentList= mutableListOf<Student>()
     private val studentAdapter = StudentAdapter(studentList)
 
@@ -19,10 +24,27 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //manggil kelas presenter
-
         setupView()
-        presenter.saySomething()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         presenter.getStudents()
+    }
+
+    //menampilkan menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_new_students, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.newStudents){
+            startActivity(Intent(this,NewStudentActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
+
     }
 
     private fun setupView() {
@@ -33,16 +55,13 @@ class MainActivity : AppCompatActivity(), MainView {
         }
     }
 
-    //main activity sebagai View manggil kelas Presenter
-    //overide dari MainView dari kelas interfiace
-    override fun sayHello(hello: String) {
-      print(hello)
-    }
-
     override fun showStudent(results: List<Student>) {
         studentList.clear()
-        studentList.addAll(results)
+        studentList.addAll(results.sortedByDescending { it.id })
         studentAdapter.notifyDataSetChanged()
+    }
 
+    override fun onError(message: String) {
+        toast(message)
     }
 }

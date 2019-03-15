@@ -1,4 +1,4 @@
-package com.example.binarmvp.Home
+package com.example.binarmvp.UI.Home
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

@@ -11,12 +11,11 @@ import java.util.concurrent.TimeUnit
 object NetworkConfig {
     fun getRetrofit():Retrofit{
         return  Retrofit.Builder()
-            .baseUrl("http://kotlinspringcrud.herokuapp.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHttpClient()) //retrofit butuh client
             .build()
     }
-
     //client
     private fun getOkHttpClient(): OkHttpClient {
         val timeOut = 60L

@@ -1,9 +1,11 @@
-package com.example.binarmvp.Home
+package com.example.binarmvp.UI.Home
 
 import com.example.binarmvp.model.Student
 
 //penghubung dari presenter dan view
 interface MainView {
-    fun sayHello(hello:String)
+
     fun showStudent(results:List<Student>)
+    fun onError(message: String){
+    }
 }
