@@ -1,30 +1,31 @@
 package com.example.binarmvp.UI.NewStudent
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.example.binarmvp.R
+import com.example.binarmvp.common.Constant
 import com.example.binarmvp.common.toast
+import com.example.binarmvp.model.Student
 import kotlinx.android.synthetic.main.activity_new_student.*
 
-class NewStudentActivity :AppCompatActivity(), NewStudentView {
-
-
-    private val presenter = NewStudentPresenter(this)
+class FormStudentActivity : AppCompatActivity(), NewStudentView {
+    private val presenter = FormStudentPresenter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_student)
         setupView()
-
     }
 
     private fun setupView() {
+        val student: Student? = intent.getParcelableExtra(Constant.STUDENT)
         btnSaveStudent.setOnClickListener {
-            validateForm()
+            validateForm(student)
         }
+        edtStudentName.setText(student?.name)
+        edtStudentEmail.setText(student?.email)
     }
 
-    private fun validateForm() {
+    private fun validateForm(student: Student?) {
         val nama = edtStudentName.text.toString()
         val email = edtStudentEmail.text.toString()
 
@@ -36,7 +37,12 @@ class NewStudentActivity :AppCompatActivity(), NewStudentView {
         map["name"] = nama
         map["email"] = email
 
-        presenter.newStudent(map)
+
+        if (student == null) {
+            presenter.newStudent(map)
+        } else {
+            presenter.editStudent(student.id, map)
+        }
     }
 
     override fun onStudentSave(status: Boolean, message: String) {

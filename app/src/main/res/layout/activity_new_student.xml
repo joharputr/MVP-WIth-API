@@ -13,7 +13,7 @@
     <EditText android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/edtStudentEmail"
-              android:hint="@string/student_name"
+              android:hint="@string/student_email"
     />
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -2,4 +2,5 @@
     <string name="app_name">BinarMVP</string>
     <string name="student_name">student_name</string>
     <string name="save">save</string>
+    <string name="student_email">email</string>
 </resources>

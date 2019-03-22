@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".UI.NewStudent.NewStudentActivity"/>
+        <activity android:name=".UI.NewStudent.FormStudentActivity"/>
     </application>
 
 </manifest>
